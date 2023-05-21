@@ -18,8 +18,6 @@ async function init() {
     permissions: ["Administrator"],
   });
   console.log(invite);
-
-  console.log("test");
 }
 
 init().then();

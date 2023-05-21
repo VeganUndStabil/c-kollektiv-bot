@@ -17,6 +17,12 @@ export enum RequestStatus {
   IN_PROGRESS = "in-progress",
 }
 
+export enum PackageType {
+  RUNDUM_SORGLOS = "rundum-sorglos",
+  EDITING = "editing",
+  CUTTING = "cutting",
+}
+
 @Entity("requests")
 export class Request extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
@@ -41,6 +47,13 @@ export class Request extends BaseEntity {
   })
   status!: RequestStatus;
 
+  @Column({
+    type: "enum",
+    enum: PackageType,
+    default: PackageType.RUNDUM_SORGLOS
+  })
+  type!: PackageType;
+
   @Column("varchar")
   serverId!: string;
 
@@ -62,6 +75,12 @@ export class Request extends BaseEntity {
   @ManyToOne(() => User, user => user.requests)
   author!: User;
 
-  @ManyToOne(() => User, user => user.assignedRequests, { nullable: true })
-  assigned?: User;
+  @ManyToOne(() => User, user => user.assignedCuttingRequests, { nullable: true })
+  assignedCutter?: User;
+
+  @ManyToOne(() => User, user => user.assignedThumbnailRequests, { nullable: true })
+  assignedThumbnailCreator?: User;
+
+  @ManyToOne(() => User, user => user.assignedModerationRequests, { nullable: true })
+  assignedModerator?: User;
 }

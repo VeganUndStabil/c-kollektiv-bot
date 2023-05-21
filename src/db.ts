@@ -1,3 +1,4 @@
+import { Configuration } from "src/entities/configuration";
 import { Request } from "src/entities/request";
 import { User } from "src/entities/user";
 import { DataSource } from "typeorm";
@@ -10,6 +11,6 @@ export const db = new DataSource({
   username: "discordbot",
   password: "discordbot",
   database: "discordbot",
-  logging: process.env.NODE_ENV !== "production",
-  entities: [User, Request],
+  logging: false, // process.env.NODE_ENV !== "production",
+  entities: [User, Request, Configuration],
 });

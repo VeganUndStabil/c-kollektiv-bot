@@ -33,6 +33,12 @@ export class User extends BaseEntity {
   @OneToMany(() => Request, request => request.author)
   requests!: Request[];
 
-  @OneToMany(() => Request, request => request.assigned)
-  assignedRequests!: Request[];
+  @OneToMany(() => Request, request => request.assignedCutter)
+  assignedCuttingRequests!: Request[];
+
+  @OneToMany(() => Request, request => request.assignedThumbnailCreator)
+  assignedThumbnailRequests!: Request[];
+
+  @OneToMany(() => Request, request => request.assignedModerator)
+  assignedModerationRequests!: Request[];
 }
