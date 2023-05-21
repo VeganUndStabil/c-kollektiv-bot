@@ -101,7 +101,7 @@ commandHandlers["set-channels"] = async (interaction) => {
 commandHandlers["create-request-wizard-button"] = async (interaction) => {
   const channel = interaction.channel!;
   channel.send({
-    content: `schreib hier deinen tollen text rein :)`,
+    content: `Mit diesem Knopf startest du den Auftrag`,
     components: [
       new ActionRowBuilder<ButtonBuilder>().setComponents(
         new ButtonBuilder()
@@ -141,12 +141,12 @@ Beinhaltet:
 Beinhaltet:
 - Videos cutten
 - Thumbnail erstellen
-- Endprodukt an die influencende Person zurückschicken
+- Fertiges Video und Thumbnail an dich zurückschicken
 
 3. Nur Cutting:
 Beinhaltet:
 - Videos cutten
-- Fertiges Video an die influencende Person zurückschicken`,
+- Fertiges Video an dich zurückschicken`,
         components: [
           new ActionRowBuilder<ButtonBuilder>().setComponents(
             new ButtonBuilder()
@@ -189,7 +189,7 @@ Beinhaltet:
                 .setLabel("Beschreibung")
                 .setRequired(true)
                 .setStyle(TextInputStyle.Paragraph)
-                .setPlaceholder("Beschreibe dein Video und deine Anforderungen, etc.")
+                .setPlaceholder("Schreibe hier deine Vorstellungen für das Video (und Thumbnail) rein")
             )
         )
       );
