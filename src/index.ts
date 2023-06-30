@@ -1,19 +1,21 @@
 import { OAuth2Scopes } from "discord.js";
 import { db } from "src/db";
-import { client } from "src/discord";
-import { config } from "dotenv";
+import { applyServices, discord, discordLogin } from "src/discord";
+import { env } from "src/util/env";
+import "./services";
 
 
 async function init() {
-  config();
+  console.log(env("postgres_host"));
+
   await db.initialize();
   await db.runMigrations();
   await db.synchronize();
   console.log("db up");
-
-  await client.login(process.env.DISCORD_TOKEN);
+  await applyServices(discord);
+  await discordLogin();
   console.log("bot up");
-  const invite = client.generateInvite({
+  const invite = discord.generateInvite({
     scopes: [OAuth2Scopes.Bot],
     permissions: ["Administrator"],
   });

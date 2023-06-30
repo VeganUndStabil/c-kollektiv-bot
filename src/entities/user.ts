@@ -18,8 +18,8 @@ export class User extends BaseEntity {
   @Column({ type: "varchar" })
   username!: string;
 
-  @Column({ type: "varchar" })
-  avatarUrl!: string;
+  @Column({ type: "varchar", nullable: true })
+  avatarUrl?: string;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -32,13 +32,4 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Request, request => request.author)
   requests!: Request[];
-
-  @OneToMany(() => Request, request => request.assignedCutter)
-  assignedCuttingRequests!: Request[];
-
-  @OneToMany(() => Request, request => request.assignedThumbnailCreator)
-  assignedThumbnailRequests!: Request[];
-
-  @OneToMany(() => Request, request => request.assignedModerator)
-  assignedModerationRequests!: Request[];
 }

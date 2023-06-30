@@ -25,8 +25,8 @@ export enum PackageType {
 
 @Entity("requests")
 export class Request extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
-  uuid!: string;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
   @Column("varchar")
   title!: string;
@@ -57,11 +57,14 @@ export class Request extends BaseEntity {
   @Column("varchar")
   serverId!: string;
 
-  @Column("varchar")
-  channelId!: string;
+  @Column("varchar", { nullable: true })
+  channelId?: string;
 
-  @Column("varchar")
-  messageId!: string;
+  @Column("varchar", { nullable: true })
+  cuttingMessageId?: string;
+
+  @Column("varchar", { nullable: true })
+  thumbnailMessageId?: string;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -74,13 +77,4 @@ export class Request extends BaseEntity {
 
   @ManyToOne(() => User, user => user.requests)
   author!: User;
-
-  @ManyToOne(() => User, user => user.assignedCuttingRequests, { nullable: true })
-  assignedCutter?: User;
-
-  @ManyToOne(() => User, user => user.assignedThumbnailRequests, { nullable: true })
-  assignedThumbnailCreator?: User;
-
-  @ManyToOne(() => User, user => user.assignedModerationRequests, { nullable: true })
-  assignedModerator?: User;
 }
